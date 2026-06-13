@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ng Qin Xuan — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --graphite: #1A1D23;
+    --graphite-soft: #232730;
+    --steel: #4A7C9E;
+    --silver: #C8CDD3;
+    --amber: #E8A04C;
+    --paper: #F4F2EE;
+    --line: #3A3F4A;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--graphite);
+    font-family: var(--body);
+    line-height: 1.6;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--graphite);
+    border-bottom: 1px solid var(--line);
+    padding: 0 6vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-mark {
+    font-family: var(--mono); color: var(--amber); font-size: 0.85rem;
+    letter-spacing: 0.1em; font-weight: 600;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--silver); text-decoration: none; font-size: 0.85rem;
+    font-family: var(--mono); letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--amber); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--graphite);
+    color: var(--paper);
+    padding: 7vw 6vw 6vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 45%;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 18px, rgba(74,124,158,0.07) 18px 19px),
+      repeating-linear-gradient(45deg, transparent 0 18px, rgba(232,160,76,0.05) 18px 19px);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: var(--mono); color: var(--steel); font-size: 0.8rem;
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.2rem;
+    position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    max-width: 14ch; position: relative; z-index: 1;
+  }
+  .hero h1 span { color: var(--amber); }
+  .hero-sub {
+    margin-top: 1.6rem; max-width: 46ch; color: var(--silver);
+    font-size: 1.05rem; position: relative; z-index: 1;
+  }
+  .hero-meta {
+    margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 2.5rem;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--steel);
+    position: relative; z-index: 1;
+  }
+  .hero-meta div b {
+    display: block; color: var(--paper); font-size: 1.4rem;
+    font-family: var(--display); font-weight: 700; margin-bottom: 0.2rem;
+  }
+  .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn {
+    font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.05em;
+    padding: 0.85rem 1.6rem; border-radius: 2px; text-decoration: none;
+    transition: transform 0.15s ease, background 0.2s, color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary { background: var(--amber); color: var(--graphite); font-weight: 600; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--paper); }
+  .btn-ghost:hover { border-color: var(--steel); color: var(--steel); }
+
+  /* ===== SECTION SHARED ===== */
+  section { padding: 5.5vw 6vw; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem;
+    border-bottom: 1px solid var(--line); padding-bottom: 1.2rem;
+  }
+  .section-tag {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--steel);
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .section-head h2 {
+    font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700; letter-spacing: -0.01em;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem;
+    align-items: start;
+  }
+  .about-card {
+    background: var(--graphite); color: var(--paper);
+    padding: 2rem; border-radius: 4px;
+    font-family: var(--mono); font-size: 0.85rem;
+  }
+  .about-card .label { color: var(--steel); letter-spacing: 0.1em; font-size: 0.75rem; margin-bottom: 0.4rem; }
+  .about-card .row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+  .about-card .row:last-child { border-bottom: none; }
+  .about-bio p { margin-bottom: 1.2rem; font-size: 1.05rem; max-width: 60ch; }
+  .about-bio p:first-of-type {
+    font-family: var(--display); font-weight: 600; font-size: 1.3rem;
+    color: var(--graphite);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .skill-tags span {
+    font-family: var(--mono); font-size: 0.75rem; padding: 0.4rem 0.8rem;
+    border: 1px solid var(--graphite); border-radius: 2px; letter-spacing: 0.03em;
+  }
+
+  /* ===== PROJECTS — SPEC SHEET CARDS ===== */
+  .project {
+    border: 1px solid var(--line);
+    background: #ffffff;
+    margin-bottom: 2.5rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .project-head {
+    background: var(--graphite); color: var(--paper);
+    padding: 1.4rem 2rem;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  }
+  .project-head .pid { font-family: var(--mono); color: var(--amber); font-size: 0.8rem; letter-spacing: 0.15em; }
+  .project-head h3 { font-family: var(--display); font-size: 1.5rem; font-weight: 700; margin-top: 0.3rem; }
+  .project-head .pdate { font-family: var(--mono); font-size: 0.8rem; color: var(--steel); }
+
+  .project-body { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .project-visual {
+    background: var(--graphite-soft);
+    border: 1px dashed var(--steel);
+    border-radius: 4px;
+    min-height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--silver); font-family: var(--mono); font-size: 0.8rem;
+    text-align: center; padding: 1.5rem;
+  }
+  .project-detail .field { margin-bottom: 1.2rem; }
+  .project-detail .field-label {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em;
+    color: var(--steel); text-transform: uppercase; margin-bottom: 0.35rem;
+  }
+  .project-detail .field-value { font-size: 0.95rem; }
+  .project-detail ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+  .project-detail li { margin-bottom: 0.3rem; }
+
+  .result-strip {
+    background: var(--paper); border-top: 1px solid var(--line);
+    padding: 1.2rem 2rem;
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+  }
+  .result-strip .stat b {
+    display: block; font-family: var(--display); font-size: 1.6rem;
+    color: var(--graphite); font-weight: 700;
+  }
+  .result-strip .stat span {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--steel);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .project-visual img { object-fit: cover; transition: transform 0.2s; cursor: pointer; }
+  .project-visual img:hover { transform: scale(1.02); }
+
+  @media (max-width: 800px) {
+    .about { grid-template-columns: 1fr; gap: 2rem; }
+    .project-body { grid-template-columns: 1fr; }
+    .hero::before { width: 100%; opacity: 0.5; }
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--graphite); color: var(--paper);
+  }
+  .contact .section-head { border-bottom-color: var(--line); }
+  .contact .section-tag { color: var(--amber); }
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;
+  }
+  .contact-item .field-label { color: var(--steel); }
+  .contact-item a { color: var(--paper); text-decoration: none; font-family: var(--mono); font-size: 1.05rem; }
+  .contact-item a:hover { color: var(--amber); }
+
+  footer {
+    text-align: center; padding: 2rem; font-family: var(--mono);
+    font-size: 0.75rem; color: var(--silver); background: var(--graphite);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn-primary:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">NQX // PORTFOLIO</div>
+  <div class="nav-links">
+    <a href="#about">Profile</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Robotics & Mechatronics — Sales-Minded Engineer</div>
+  <h1>Built a watch business from S$300.<br>Now bringing that <span>drive to technical sales.</span></h1>
+  <p class="hero-sub">
+    I'm Ng Qin Xuan, a Diploma in Robotics & Mechatronics graduate from Nanyang Polytechnic.
+    I combine hands-on engineering training with real commercial experience — running my own
+    luxury watch resale business, generating leads through hundreds of sales calls, and
+    delivering technical projects from IoT systems to product pitches.
+  </p>
+  <div class="hero-meta">
+    <div><b>S$300 → 5-fig</b>Watch business revenue growth</div>
+    <div><b>500+</b>Outbound sales calls made</div>
+    <div><b>3</b>Featured engineering &amp; business projects</div>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+    <a href="https://carousell.app.link/qBIrn3XiW3b" class="btn btn-ghost" target="_blank" rel="noopener">View Watch Shop ↗</a>
+  </div>
+</header>
+
+<section id="about">
+  <div class="section-head">
+    <span class="section-tag">01 / Profile</span>
+    <h2>About Me</h2>
+  </div>
+  <div class="about">
+    <div class="about-card">
+      <div class="label">// CURRENT STATUS</div>
+      <div class="row"><span>Education</span><span>Dip. Robotics &amp; Mechatronics, NYP</span></div>
+      <div class="row"><span>Status</span><span>Graduate</span></div>
+      <div class="row"><span>Based in</span><span>Singapore (East)</span></div>
+      <div class="row"><span>Focus</span><span>Technical / B2B Sales</span></div>
+      <div class="row"><span>Contact</span><span>qinxuan703@gmail.com</span></div>
+    </div>
+    <div class="about-bio">
+      <p>I think of myself as an engineer who's spent the last few years also running a business.</p>
+      <p>
+        My diploma gave me a solid grounding in automation, robotics, electronics, embedded systems
+        and basic machine learning — but the experience I'm most proud of is one I built myself.
+        Since 2024 I've run a luxury watch resale business, growing it from S$300 in starting capital
+        to five-figure annual revenue by sourcing, authenticating, valuing and selling pre-owned watches
+        to a growing base of repeat customers and collectors.
+      </p>
+      <p>
+        Alongside that, I've taken on part-time telemarketing and real estate sales work — over 500
+        outbound calls and counting — and worked on engineering projects ranging from an IoT smart pill
+        dispenser to a pitch deck for a pet-waste management startup concept. I'm looking for a role
+        where I can put both halves of that experience to work, particularly in technical sales.
+      </p>
+      <div class="skill-tags">
+        <span>Sales & Negotiation</span>
+        <span>Business Operations</span>
+        <span>E-Commerce & Digital Marketing</span>
+        <span>PLC & Automation</span>
+        <span>Python / Tkinter</span>
+        <span>C++</span>
+        <span>CAD (Autodesk Inventor)</span>
+        <span>Team Player</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-head">
+    <span class="section-tag">02 / Selected Work</span>
+    <h2>Projects</h2>
+  </div>
+
+  <!-- PROJECT 1 -->
+  <div class="project">
+    <div class="project-head">
+      <div>
+        <div class="pid">PRJ-01 // SELF-FOUNDED BUSINESS</div>
+        <h3>Luxury Watch Resale Business</h3>
+      </div>
+      <div class="pdate">2024 — Present</div>
+    </div>
+    <div class="project-body">
+      <div class="project-visual">
+        <a href="https://carousell.app.link/qBIrn3XiW3b" target="_blank" rel="noopener" style="color:var(--amber); text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+          <span style="font-size:1.1rem; font-weight:600;">View Live Shop on Carousell ↗</span>
+          <span style="font-family:var(--mono); font-size:0.75rem; color:var(--silver);">carousell.app.link/qBIrn3XiW3b</span>
+        </a>
+      </div>
+      <div class="project-detail">
+        <div class="field">
+          <div class="field-label">Scope</div>
+          <div class="field-value">
+            Self-founded resale operation specialising in pre-owned luxury watches —
+            from sourcing to final sale, run entirely independently.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">My Role & Approach</div>
+          <div class="field-value">
+            Founder and sole operator. Focused on building buyer trust through accurate
+            authentication and condition grading, and on data-led pricing using
+            market research and competitor benchmarking.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Process</div>
+          <div class="field-value">
+            <ul>
+              <li>Sourced and verified authenticity/condition of pre-owned watches</li>
+              <li>Researched market prices and set competitive pricing</li>
+              <li>Marketed listings and negotiated with buyers</li>
+              <li>Managed inventory, transactions, cash flow and after-sales follow-up</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="result-strip">
+      <div class="stat"><b>S$300 → 5-Fig</b><span>Revenue Growth (Year 1)</span></div>
+      <div class="stat"><b>Repeat</b><span>Customer & Collector Base</span></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 2 -->
+  <div class="project">
+    <div class="project-head">
+      <div>
+        <div class="pid">PRJ-02 // TECHNOPRENEURSHIP MODULE</div>
+        <h3>EcoPaw — Smart Pet Waste Management</h3>
+      </div>
+      <div class="pdate">2026</div>
+    </div>
+    <div class="project-body">
+      <div class="project-visual" style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; padding:0.8rem; min-height:auto;">
+        <img src="images/ecopaw_storyboard.png" alt="EcoPaw storyboard" style="width:100%; border-radius:3px; grid-column: span 2;">
+        <img src="images/ecopaw_scoop_device.png" alt="EcoPawScoop device parts diagram" style="width:100%; border-radius:3px;">
+        <img src="images/ecopaw_bin.png" alt="EcoPaw smart bin" style="width:100%; border-radius:3px;">
+        <img src="images/ecopaw_app.png" alt="EcoPaw mobile app" style="width:100%; border-radius:3px;">
+        <img src="images/ecopaw_competitor_scoop.png" alt="EcoPaw vs Petmaker comparison" style="width:100%; border-radius:3px;">
+      </div>
+      <div class="project-detail">
+        <div class="field">
+          <div class="field-label">Scope</div>
+          <div class="field-value">
+            Group pitch developed for the Technopreneurship module — a hands-free pet
+            waste scooper, IoT smart bin, and rewards app concept addressing pet waste
+            disposal and sustainability.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">My Role & Approach</div>
+          <div class="field-value">
+            Led the pitch deck and rewards app design. Focused on differentiating the
+            concept through competitor analysis and designing an app that would
+            genuinely motivate user participation.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Process</div>
+          <div class="field-value">
+            <ul>
+              <li>Conducted competitor analysis to identify market gaps</li>
+              <li>Structured pitch deck: problem, solution, value proposition, business model</li>
+              <li>Designed rewards app UI/UX — QR scanning, carbon points, voucher redemption</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="result-strip">
+      <div class="stat"><b>Pitch Deck</b><span>Delivered to Evaluators</span></div>
+      <div class="stat"><b>App UI/UX</b><span>Rewards System Designed</span></div>
+    </div>
+  </div>
+
+  <!-- PROJECT 3 -->
+  <div class="project">
+    <div class="project-head">
+      <div>
+        <div class="pid">PRJ-03 // IOT / EMBEDDED SYSTEMS</div>
+        <h3>Smart Pill Dispenser</h3>
+      </div>
+      <div class="pdate">2025</div>
+    </div>
+    <div class="project-body">
+      <div class="project-visual" style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; padding:0.8rem; min-height:auto;">
+        <img src="images/pill_dashboard.png" alt="Smart Pill Dispenser GUI dashboard" style="width:100%; border-radius:3px; grid-column: span 2;">
+        <img src="images/pill_hardware_front.png" alt="Smart Pill Dispenser hardware front view" style="width:100%; border-radius:3px;">
+        <img src="images/pill_hardware_internal.png" alt="Smart Pill Dispenser internal wiring" style="width:100%; border-radius:3px;">
+        <img src="images/pill_servo_code.png" alt="Servo motor configuration code" style="width:100%; border-radius:3px;">
+        <img src="images/pill_sensehat_code.png" alt="Sense HAT verification code" style="width:100%; border-radius:3px;">
+      </div>
+      <div class="project-detail">
+        <div class="field">
+          <div class="field-label">Scope</div>
+          <div class="field-value">
+            Raspberry Pi-based automated pill dispenser for medication management,
+            with scheduled dispensing, pill counting, and remote monitoring.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">My Role & Approach</div>
+          <div class="field-value">
+            Built the software side with one teammate — GUI and cloud integration,
+            while my teammate handled hardware and embedded code. Resolved mismatches
+            between hardware output and cloud data.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Process</div>
+          <div class="field-value">
+            <ul>
+              <li>Built Tkinter GUI dashboard for schedules and pill counts</li>
+              <li>Integrated with Adafruit IO for cloud data logging</li>
+              <li>Resolved hardware-to-cloud sync and feed issues</li>
+              <li>Co-prepared project presentation and demo script</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="result-strip">
+      <div class="stat"><b>Working</b><span>Prototype Delivered</span></div>
+      <div class="stat"><b>Cloud-Connected</b><span>GUI Dashboard</span></div>
+    </div>
+  </div>
+
+</section>
+
+<section id="contact" class="contact">
+  <div class="section-head">
+    <span class="section-tag">03 / Get In Touch</span>
+    <h2>Contact</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="field-label">Email</div>
+      <a href="mailto:qinxuan703@gmail.com">qinxuan703@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <div class="field-label">Phone</div>
+      <a href="tel:+6580833347">+65 8083 3347</a>
+    </div>
+    <div class="contact-item">
+      <div class="field-label">LinkedIn</div>
+      <a href="https://linkedin.com/in/ngqinxuan" target="_blank" rel="noopener">linkedin.com/in/ngqinxuan</a>
+    </div>
+    <div class="contact-item">
+      <div class="field-label">Watch Shop</div>
+      <a href="https://carousell.app.link/qBIrn3XiW3b" target="_blank" rel="noopener">View on Carousell ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>NG QIN XUAN — DIGITAL PORTFOLIO — BUILT FOR ICA2 SUBMISSION</footer>
+
+</body>
+</html>
